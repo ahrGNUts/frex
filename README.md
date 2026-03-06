@@ -35,15 +35,16 @@ claude --plugin-dir /path/to/frex
 ## Usage
 
 ```
-/frex <video-file> [start-seconds] [end-seconds] [fps]
+/frex <video-file> [--start N] [--end N] [--fps N] [--context "..."]
 ```
 
-| Argument | Required | Default | Description |
-|----------|----------|---------|-------------|
-| video-file | Yes | — | Path to the video file |
-| start-seconds | No | 0 | Start time in seconds |
-| end-seconds | No | end of video | End time in seconds |
-| fps | No | 10 | Frames per second to extract |
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| video-file | Yes | — | Path to the video file (first argument) |
+| `--start` | No | 0 | Start time in seconds |
+| `--end` | No | end of video | End time in seconds |
+| `--fps` | No | 10 | Frames per second to extract |
+| `--context` | No | — | What to look for in the frames (free-form text) |
 
 ### Examples
 
@@ -54,12 +55,22 @@ Extract frames from entire video at 10 fps:
 
 Extract frames from seconds 10 to 30:
 ```
-/frex recording.mp4 10 30
+/frex recording.mp4 --start 10 --end 30
 ```
 
 Extract 2 frames per second from a specific range:
 ```
-/frex demo.mov 5 15 2
+/frex demo.mov --start 5 --end 15 --fps 2
+```
+
+Just set fps, skip other options:
+```
+/frex recording.mp4 --fps 5
+```
+
+Look for a specific issue:
+```
+/frex recording.mp4 --fps 5 --context check if the tooltip flickers when hovering
 ```
 
 ## Configuration

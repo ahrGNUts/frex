@@ -1,6 +1,6 @@
 ---
 description: Extract frames from a video file for visual analysis and UI debugging
-argument-hint: <video-file> [start-seconds] [end-seconds] [fps]
+argument-hint: <video-file> [--start N] [--end N] [--fps N] [--context "..."]
 allowed-tools: Bash, Read, Glob, Agent
 disable-model-invocation: true
 ---
@@ -13,13 +13,15 @@ Extract frames from a video file so you can analyze them visually. Useful for de
 
 The user provided: `$ARGUMENTS`
 
-Parse the arguments as positional values:
-- **First argument** (`$0`): path to the video file (required)
-- **Second argument** (`$1`): start time in seconds (optional)
-- **Third argument** (`$2`): end time in seconds (optional)
-- **Fourth argument** (`$3`): frames per second to extract (optional)
+Parse the arguments as a **video file path** (required, always the first argument) followed by optional **named flags**:
 
-If no video file path was provided, ask the user to provide one and stop.
+- **video-file** (first argument, required): path to the video file
+- `--start N`: start time in seconds (default: 0)
+- `--end N`: end time in seconds (default: end of video)
+- `--fps N`: frames per second to extract (default: 10)
+- `--context "..."`: free-form text describing what to look for in the frames (e.g. "look for a flicker in the sidebar" or "check if the modal animation completes smoothly")
+
+Named flags can appear in any order after the video file path. If no video file path was provided, ask the user to provide one and stop.
 
 ## Environment variable overrides
 
@@ -115,10 +117,13 @@ Use the Agent tool with `subagent_type: "general-purpose"` and provide a prompt 
 >
 > The frames are located in: `<output-dir>`
 >
+> **User context** (if provided): `<context>`
+> If the user provided context, focus your analysis on what they described. If no context was provided, do a general analysis.
+>
 > 1. Use the Glob tool to list all `frame_*.jpg` files in that directory.
 > 2. If there are more than `<FREX_MAX_FRAMES>` frames (default: 50), only read the first N.
 > 3. Use the Read tool to read each frame image file — the Read tool displays images visually.
-> 4. For each frame, briefly describe what you see (UI state, any anomalies, visual differences from adjacent frames).
+> 4. For each frame, briefly describe what you see (UI state, any anomalies, visual differences from adjacent frames). Pay special attention to anything matching the user's context if provided.
 > 5. At the end, provide a summary of the visual progression across all frames and flag anything that looks like a bug, glitch, or transient UI state.
 > 6. List the file paths of all frames so the user can reference specific ones.
 
