@@ -80,13 +80,13 @@ export FREX_FPS=2
 
 ## Output
 
-Frames are saved as PNG files:
+Frames are saved as JPG files:
 
 ```
 /tmp/claude-frames/1709654321/
-├── frame_001.png
-├── frame_002.png
-├── frame_003.png
+├── frame_001.jpg
+├── frame_002.jpg
+├── frame_003.jpg
 └── ...
 ```
 

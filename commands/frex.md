@@ -75,17 +75,17 @@ Store the directory path. Then run ffmpeg to extract frames based on the parsed 
 
 - If BOTH start and end times are provided:
   ```bash
-  ffmpeg -y -ss <start> -to <end> -i "<video-file>" -vf fps=<fps> "<output-dir>/frame_%03d.png" 2>&1
+  ffmpeg -y -ss <start> -to <end> -i "<video-file>" -vf fps=<fps> "<output-dir>/frame_%03d.jpg" 2>&1
   ```
 
 - If ONLY start time is provided (no end time):
   ```bash
-  ffmpeg -y -ss <start> -i "<video-file>" -vf fps=<fps> "<output-dir>/frame_%03d.png" 2>&1
+  ffmpeg -y -ss <start> -i "<video-file>" -vf fps=<fps> "<output-dir>/frame_%03d.jpg" 2>&1
   ```
 
 - If NO start/end times are provided:
   ```bash
-  ffmpeg -y -i "<video-file>" -vf fps=<fps> "<output-dir>/frame_%03d.png" 2>&1
+  ffmpeg -y -i "<video-file>" -vf fps=<fps> "<output-dir>/frame_%03d.jpg" 2>&1
   ```
 
 If ffmpeg fails, show the error output and suggest common fixes (wrong file format, corrupted file, unsupported codec).
@@ -95,7 +95,7 @@ If ffmpeg fails, show the error output and suggest common fixes (wrong file form
 List the extracted frames:
 
 ```bash
-ls "<output-dir>"/frame_*.png 2>/dev/null | wc -l
+ls "<output-dir>"/frame_*.jpg 2>/dev/null | wc -l
 ```
 
 Print a summary including:
@@ -115,7 +115,7 @@ Use the Agent tool with `subagent_type: "general-purpose"` and provide a prompt 
 >
 > The frames are located in: `<output-dir>`
 >
-> 1. Use the Glob tool to list all `frame_*.png` files in that directory.
+> 1. Use the Glob tool to list all `frame_*.jpg` files in that directory.
 > 2. If there are more than `<FREX_MAX_FRAMES>` frames (default: 50), only read the first N.
 > 3. Use the Read tool to read each frame image file — the Read tool displays images visually.
 > 4. For each frame, briefly describe what you see (UI state, any anomalies, visual differences from adjacent frames).
