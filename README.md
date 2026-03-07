@@ -11,6 +11,16 @@ The `/frex` command extracts individual frames from a video file using ffmpeg, t
 - Reviewing animations and transitions
 - Inspecting transient states that are hard to screenshot manually
 
+## Why not just take single screenshots?
+You certainly can (and should) if a single screenshot captures the issue you're seeing in a UI!
+
+The specific use-cases for this plugin are for providing Claude context for UI quirks that are:
+1. Only present for a very brief period (like a flickering UI component or a window that appears and immediately disappears)
+2. A series of rapid sequential behaviors and/or interactions
+
+Since this plugin turns a video file into stills, it's only really suitable for short clips (see [Caveats](#Caveats) below).
+If you need longer video input than this plugin can provide, it might be better to work Gemini's native video processing into your CC workflow via MCP.
+
 ## Requirements
 
 **ffmpeg** must be installed on your system:
