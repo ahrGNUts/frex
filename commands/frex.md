@@ -28,7 +28,7 @@ Named flags can appear in any order after the video file path. If no video file 
 Before applying built-in defaults, check for these environment variables using `echo $FREX_FPS`, `echo $FREX_OUTPUT_DIR`, and `echo $FREX_MAX_FRAMES`:
 
 - `FREX_FPS` — default frames per second (built-in default: `10`)
-- `FREX_OUTPUT_DIR` — output directory for frames (built-in default: `/tmp/claude-frames/<timestamp>`)
+- `FREX_OUTPUT_DIR` — output directory for frames (built-in default: `<system-temp>/claude-frames/<timestamp>`)
 - `FREX_MAX_FRAMES` — max number of frames to read and display (built-in default: `50`)
 
 **Precedence:** explicit arguments > environment variables > built-in defaults.
@@ -67,11 +67,15 @@ Report the video duration and resolution to the user. If ffprobe fails, continue
 
 ## Step 3: Extract frames
 
-Determine the output directory. If `FREX_OUTPUT_DIR` is set, use that. Otherwise, create a timestamped directory:
+Determine the output directory. If `FREX_OUTPUT_DIR` is set, use that. Otherwise, detect the system temp directory and create a timestamped subdirectory:
 
 ```bash
-mkdir -p /tmp/claude-frames/$(date +%s)
+TMPBASE="${FREX_OUTPUT_DIR:-${TMPDIR:-${TEMP:-${TMP:-/tmp}}}}"
+OUTDIR="$TMPBASE/claude-frames/$(date +%s)"
+mkdir -p "$OUTDIR"
 ```
+
+This handles macOS (`$TMPDIR`), Windows (`$TEMP`/`$TMP`), and Linux (`/tmp`).
 
 Store the directory path. Then run ffmpeg to extract frames based on the parsed arguments:
 

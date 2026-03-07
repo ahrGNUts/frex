@@ -22,8 +22,16 @@ The `/frex` command extracts individual frames from a video file using ffmpeg, t
 
 ## Installation
 
-```bash
-claude plugin install frex
+First, add the marketplace:
+
+```
+/plugin marketplace add ahrGNUts/frex
+```
+
+Then install the plugin:
+
+```
+/plugin install frex
 ```
 
 For development/testing:
@@ -80,7 +88,7 @@ Set environment variables to override defaults. Explicit arguments always take p
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `FREX_FPS` | `10` | Default frames per second |
-| `FREX_OUTPUT_DIR` | `/tmp/claude-frames/<timestamp>` | Output directory for frames |
+| `FREX_OUTPUT_DIR` | `<system-temp>/claude-frames/<timestamp>` | Output directory for frames |
 | `FREX_MAX_FRAMES` | `50` | Max frames to display in session |
 
 Example — set default fps to 2:
@@ -94,7 +102,8 @@ export FREX_FPS=2
 Frames are saved as JPG files:
 
 ```
-/tmp/claude-frames/1709654321/
+$TMPDIR/claude-frames/1709654321/    # macOS/Linux
+%TEMP%\claude-frames\1709654321\     # Windows
 ├── frame_001.jpg
 ├── frame_002.jpg
 ├── frame_003.jpg
@@ -102,6 +111,12 @@ Frames are saved as JPG files:
 ```
 
 Claude reads each frame visually and can describe what it sees, helping you identify UI issues without manually scrubbing through a video.
+
+## Caveats
+
+- **Frame count can get large fast.** At the default 10 fps, a 60-second clip produces 600 frames. Use `--start`/`--end` to narrow the range, or lower `--fps` for longer recordings.
+- **Long clips may produce diminishing returns.** The subagent that analyzes frames is subject to context limits. `FREX_MAX_FRAMES` (default: 50) caps how many frames are read, but even so, shorter focused clips tend to give better results than full recordings.
+- **Frames are written to disk.** Output goes to your system's temp directory under `claude-frames/` by default. These are not automatically cleaned up — delete them manually or point `FREX_OUTPUT_DIR` somewhere you periodically clear.
 
 ## License
 

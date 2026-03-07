@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "frex",
+  "owner": {
+    "name": "ahrGNUts"
+  },
+  "metadata": {
+    "description": "Video frame extractor for UI debugging in Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "frex",
+      "source": ".",
+      "description": "Extract video frames for visual analysis and UI debugging"
+    }
+  ]
+}
