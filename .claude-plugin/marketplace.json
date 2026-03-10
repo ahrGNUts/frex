@@ -13,7 +13,7 @@
       "name": "frex",
       "source": "./",
       "description": "Extract video frames for visual analysis and UI debugging",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "homepage": "https://github.com/ahrGNUts/frex",
       "tags": ["video", "frame-extraction", "vision", "debugging"]
     }

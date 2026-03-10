@@ -1,5 +1,5 @@
 ---
-description: Extract frames from a video file for visual analysis and UI debugging
+description: "Extract video frames — usage: <video-file> [--start N] [--end N] [--fps N] [--context '...']"
 argument-hint: <video-file> [--start N] [--end N] [--fps N] [--context "..."]
 allowed-tools: Bash, Read, Glob, Agent
 disable-model-invocation: true
