@@ -130,4 +130,4 @@ Claude reads each frame visually and can describe what it sees, helping you iden
 
 ## License
 
-GPL-2.0
+MIT
