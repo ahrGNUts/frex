@@ -18,7 +18,7 @@ Parse the arguments as a **video file path** (required, always the first argumen
 - **video-file** (first argument, required): path to the video file
 - `--start N`: start time in seconds (default: 0)
 - `--end N`: end time in seconds (default: end of video)
-- `--fps N`: frames per second to extract (default: 10)
+- `--fps N`: frames per second to extract (default: 2)
 - `--context "..."`: free-form text describing what to look for in the frames (e.g. "look for a flicker in the sidebar" or "check if the modal animation completes smoothly")
 
 Named flags can appear in any order after the video file path. If no video file path was provided, ask the user to provide one and stop.
@@ -27,7 +27,7 @@ Named flags can appear in any order after the video file path. If no video file 
 
 Before applying built-in defaults, check for these environment variables using `echo $FREX_FPS`, `echo $FREX_OUTPUT_DIR`, and `echo $FREX_MAX_FRAMES`:
 
-- `FREX_FPS` — default frames per second (built-in default: `10`)
+- `FREX_FPS` — default frames per second (built-in default: `2`)
 - `FREX_OUTPUT_DIR` — output directory for frames (built-in default: `<system-temp>/claude-frames/<timestamp>`)
 - `FREX_MAX_FRAMES` — max number of frames to read and display (built-in default: `50`)
 

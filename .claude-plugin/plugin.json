@@ -1,6 +1,6 @@
 {
   "name": "frex",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Extract video frames for UI debugging — use /frex to pull frames from screen recordings",
   "license": "MIT",
   "keywords": ["video", "frames", "ffmpeg", "ui", "debugging"]

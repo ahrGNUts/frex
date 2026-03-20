@@ -61,12 +61,12 @@ claude --plugin-dir /path/to/frex
 | video-file | Yes | — | Path to the video file (first argument) |
 | `--start` | No | 0 | Start time in seconds |
 | `--end` | No | end of video | End time in seconds |
-| `--fps` | No | 10 | Frames per second to extract |
+| `--fps` | No | 2 | Frames per second to extract |
 | `--context` | No | — | What to look for in the frames (free-form text) |
 
 ### Examples
 
-Extract frames from entire video at 10 fps:
+Extract frames from entire video at default 2 fps:
 ```
 /frex recording.mp4
 ```
@@ -97,14 +97,14 @@ Set environment variables to override defaults. Explicit arguments always take p
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `FREX_FPS` | `10` | Default frames per second |
+| `FREX_FPS` | `2` | Default frames per second |
 | `FREX_OUTPUT_DIR` | `<system-temp>/claude-frames/<timestamp>` | Output directory for frames |
 | `FREX_MAX_FRAMES` | `50` | Max frames to display in session |
 
-Example — set default fps to 2:
+Example — set default fps to 5:
 
 ```bash
-export FREX_FPS=2
+export FREX_FPS=5
 ```
 
 ## Output
@@ -124,7 +124,7 @@ Claude reads each frame visually and can describe what it sees, helping you iden
 
 ## Caveats
 
-- **Frame count can get large fast.** At the default 10 fps, a 60-second clip produces 600 frames. Use `--start`/`--end` to narrow the range, or lower `--fps` for longer recordings.
+- **Frame count can get large fast.** At the default 2 fps, a 60-second clip produces 120 frames. Use `--start`/`--end` to narrow the range, or lower `--fps` for longer recordings.
 - **Long clips may produce diminishing returns.** The subagent that analyzes frames is subject to context limits. `FREX_MAX_FRAMES` (default: 50) caps how many frames are read, but even so, shorter focused clips tend to give better results than full recordings.
 - **Frames are written to disk.** Output goes to your system's temp directory under `claude-frames/` by default. These are not automatically cleaned up — delete them manually or point `FREX_OUTPUT_DIR` somewhere you periodically clear.
 
